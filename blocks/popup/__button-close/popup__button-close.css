@@ -1,7 +1,7 @@
 .popup__button-close {
     position: -webkit-sticky;
     position: sticky;
-    top: 155px;
+    top: calc(50vh - 205px);
     left: calc(50vw + 215px + 8px);
     width: 32px;
     height: 370px;
@@ -23,7 +23,7 @@
     .popup__button-close {
         width: 20px;
         height: 358px;
-        top: 87px;
+        top: calc(50vh - 197px);
         left: calc(50vw + 141px - 20px);
     }
 }
