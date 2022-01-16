@@ -12,20 +12,20 @@ function openPopup() {
 
 function removeClasses() {
     popup.classList.remove('popup_opened');
-    popup.classList.remove('animation__open')
+    popup.classList.remove('animation__open');
     popup.classList.remove('animation__close');
 } //Removing classes to close popup
 
 function closePopup() {
     popup.classList.add('animation__close');
-    setTimeout(removeClasses,500) //animation delay
+    setTimeout(removeClasses,500); //animation delay;
 } //Close Popup
 
 function getSetValue() {
     let inputName = document.getElementById("name-input");
     let inputJob = document.getElementById("job-input");
-    inputName.setAttribute('value', blockName.textContent) 
-    inputJob.setAttribute('value', blockJob.textContent) 
+    inputName.setAttribute('value', blockName.textContent);
+    inputJob.setAttribute('value', blockJob.textContent);
 } //Form input values
 
 function formSubmitButton(evt) {
