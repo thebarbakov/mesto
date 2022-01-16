@@ -19,7 +19,7 @@
     opacity: .6;
 }
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: 949px){
     .add-button {
         width: 100%;
         background-size: 9%;
@@ -28,7 +28,7 @@
     
 }
 
-@media screen and (min-width: 768px) and (max-width: 1030px){
+@media screen and (min-width: 950px) and (max-width: 1030px){
     .add-button {
         width: 50px;
         background-size: 30%;

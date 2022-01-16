@@ -1,5 +1,5 @@
 @import url(../vendor/normalize.css);
-@import url(../vendor/);
+@import url(../vendor/fonts/inter.css);
 @import url(../blocks/root/root.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
@@ -29,3 +29,4 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/animation/__open/animation__open.css);
 @import url(../blocks/animation/__close/animation__close.css);
+@import url(../blocks/profile/__title/profile__title.css);

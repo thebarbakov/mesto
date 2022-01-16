@@ -1,0 +1,21 @@
+.profile__title {
+    display: flex;
+    align-items: center;
+    
+}
+
+@media screen and (max-width: 949px){
+    .profile__title {
+        margin: 26px auto 0 auto;
+        max-width: 282px;
+    }
+    
+}
+
+@media screen and (min-width: 950px) and (max-width: 1030px){
+    .profile__title {
+        min-width: 282px;
+        max-width: 38vw;
+    }
+    
+}
