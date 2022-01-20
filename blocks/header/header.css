@@ -1,9 +1,9 @@
 .header {
     display: flex;
     width: 68.75vw;
-    height: 74px;
+    min-height: 74px;
     max-width: 880px;
-    border-bottom: 1px solid #545454;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
     margin-left: auto;
     margin-right: auto;
     margin-top: 45px;
@@ -12,7 +12,7 @@
 @media screen and (max-width: 767px){
     .header {
         width: 100vw;
-        height: 56px;
+        min-height: 56px;
         margin-top: 28px;
     }
     

@@ -1,5 +1,5 @@
 .profile__name {
-    display: inline;
+    display: inline-block;
     font-style: normal;
     font-weight: 500;
     font-size: 42px;
@@ -8,6 +8,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    max-width: 400px;
 }
 
 
@@ -15,7 +16,18 @@
     .profile__name {
         font-size: 27px;
         line-height: 33px;
-        text-align: center;
+        text-align: center;   
+        max-width: 240px;  
+        position: relative;
+        left: 15px;
+    }
+    
+}
+
+@media screen and (min-width: 950px) and (max-width: 1100px){
+    .profile__name {
+        min-width: 282px;
+        max-width: 360px;
     }
     
 }
