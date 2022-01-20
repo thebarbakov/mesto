@@ -1,4 +1,4 @@
-.profile__button_edit-button {
+.profile__button-edit {
     display: inline-block;
     vertical-align: center;
     position: relative;
@@ -8,7 +8,7 @@
     min-height: 24px;
     max-width: 24px;
     max-height: 24px;
-    background-image: url(../../../../images/edit-button.svg);
+    background-image: url(../../../images/edit-button.svg);
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
@@ -22,12 +22,12 @@
     padding: 0;
 }
 
-.profile__button_edit-button:hover {
+.profile__button-edit:hover {
     opacity: .6;
 }
 
 @media screen and (max-width: 949px){
-    .profile__button_edit-button {
+    .profile__button-edit {
         display: inline;
         min-width: 18px;
         min-height: 18px;

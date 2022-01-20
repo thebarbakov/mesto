@@ -1,8 +1,8 @@
-.profile__button_add-button {
+.profile__button-add {
     display: inline;
     width: 150px;
     height: 50px;
-    background-image: url(../../../../images/add-button.svg);
+    background-image: url(../../../images/add-button.svg);
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
@@ -15,12 +15,12 @@
     padding: 0;
 }
 
-.profile__button_add-button:hover {
+.profile__button-add:hover {
     opacity: .6;
 }
 
 @media screen and (max-width: 949px){
-    .profile__button_add-button {
+    .profile__button-add {
         width: 282px;
         background-size: 16px;
         margin-top: 36px;
@@ -29,7 +29,7 @@
 }
 
 @media screen and (min-width: 950px) and (max-width: 1030px){
-    .profile__button_add-button {
+    .profile__button-add {
         width: 50px;
     }
     

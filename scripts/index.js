@@ -1,6 +1,6 @@
 let container = document.querySelector('.root');
 let buttonClosePopup = container.querySelector('.popup__button-close');
-let buttonOpenPopup = container.querySelector('.profile__button_edit-button');
+let buttonOpenPopup = container.querySelector('.profile__button-edit');
 let popup = container.querySelector('.popup');
 let blockName = container.querySelector('.profile__name');
 let blockJob = container.querySelector('.profile__job');
