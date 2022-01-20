@@ -10,20 +10,19 @@ let form = document.forms.popup
 
 function openPopup() {
     popup.classList.add('popup_opened');
+    inputName.setAttribute('value', blockName.textContent); 
+    inputJob.setAttribute('value', blockJob.textContent);
 } 
 function closePopup() {
     popup.classList.remove('popup_opened');
 }
 function formSubmitButton(evt) {
     evt.preventDefault();
-    let inputName = document.getElementById("name-input");
-    let inputJob = document.getElementById("job-input");
     blockName.innerText = inputName.value;
     blockJob.innerText = inputJob.value;
     closePopup();
 }
-inputName.setAttribute('value', blockName.textContent);
-inputJob.setAttribute('value', blockJob.textContent);
+
 buttonClosePopup.addEventListener('click', closePopup);
 buttonOpenPopup.addEventListener('click', openPopup);
 form.addEventListener('submit', formSubmitButton); 
