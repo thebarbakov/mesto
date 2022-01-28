@@ -38,6 +38,7 @@ let blockJob = container.querySelector('.profile__job');
 let inputProfileName = popupProfile.querySelector("#profile-name-input");
 let inputProfileJob = popupProfile.querySelector("#profile-job-input");
 
+
 function openPopupProfile() {
     popupProfile.classList.add('popup_opened');
     popupProfile.classList.add('animation__open');
@@ -46,7 +47,7 @@ function openPopupProfile() {
     window.scrollTo(scrollX, 0);
     window.addEventListener('scroll', scrollToTop);
 } 
-
+//Scroll blocking when popup opened
 let scrollToTop = () => window.scrollTo(scrollX, 0);
 
 function openPopupNewCard() {
@@ -67,14 +68,14 @@ function closePopup(event) {
     window.removeEventListener('scroll', scrollToTop);
     setTimeout(removeClasses, 500, formOfButton);
 }
-
+//Save popupProfile
 function formProfileSubmitButton(evt) {
     evt.preventDefault();
     blockName.innerText = inputProfileName.value;
     blockJob.innerText = inputProfileJob.value;
     closePopup(this);
 }
-
+//Save new card
 function addCard(name, link) {
     const cardTemplate = document.querySelector('#card').content; 
     const newCard = cardTemplate.querySelector('.element').cloneNode(true);
@@ -117,8 +118,9 @@ function addCardForm(evt) {
     inputNewCardName.value = '';
     inputNewCardLink.value = '';
 }
-
+//Add initial card
 elementsInitial.forEach(el => addCard(el.name, el.link))
+
 //Profile Buttons
 buttonOpenPopupProfile.addEventListener('click', openPopupProfile);
 buttonClosePopupProfile.addEventListener('click', function(event){closePopup(event.target)});
