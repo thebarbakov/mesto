@@ -1,0 +1,11 @@
+.animation__open {
+    animation: open .5s forwards;
+}
+@keyframes open {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
