@@ -9,17 +9,17 @@ const elementsInitial = [
     name: 'Карелия',
     link: './images/photos/karelia.jpg'},
     {
-     name: 'Карачаево-Черкесия',
-    link: './images/photos/karachaevsk.png'},
+     name: 'Сочи',
+    link: './images/photos/sochi.jpg'},
     {
     name: 'Камчатка',
     link: './images/photos/kamchatka.jpg'},
     {
-    name: 'Гора Эльбрус',
-    link: './images/photos/elbrus.png'}, 
+    name: 'Урал',
+    link: './images/photos/ural.jpg'}, 
     {
     name: 'Домбай',
-    link: './images/photos/dombay.png'}]
+    link: './images/photos/dombay.jpg'}]
 let cardsContainer = container.querySelector('.elements');
 let popupNewCard = container.querySelector('#popup-new-card');
 let formNewCard = popupNewCard.querySelector(".popup__form")
