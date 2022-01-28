@@ -22,7 +22,7 @@ const elementsInitial = [
     link: './images/photos/dombay.jpg'}]
 let cardsContainer = container.querySelector('.elements');
 let popupNewCard = container.querySelector('#popup-new-card');
-let formNewCard = popupNewCard.querySelector(".popup__form")
+let formNewCard = popupNewCard.querySelector(".popup__form");
 const buttonAddCard = container.querySelector('.profile__button-add');
 const buttonClosePopupNewCard = popupNewCard.querySelector('.popup__button-close');
 let inputNewCardName = popupNewCard.querySelector("#card-name-input");
@@ -30,7 +30,7 @@ let inputNewCardLink = popupNewCard.querySelector("#card-link-input");
 
 //Profile
 let popupProfile = container.querySelector('#popup-profile');
-let formProfile = popupProfile.querySelector(".popup__form")
+let formProfile = popupProfile.querySelector(".popup__form");
 const buttonClosePopupProfile = popupProfile.querySelector('.popup__button-close');
 const buttonOpenPopupProfile = container.querySelector('.profile__button-edit');
 let blockName = container.querySelector('.profile__name');
@@ -63,7 +63,7 @@ function closePopup(event) {
         formOfButton.classList.remove('animation__close');
     }
     let formOfButton = event.parentElement.parentElement;
-    formOfButton.classList.remove('animation__open')
+    formOfButton.classList.remove('animation__open');
     formOfButton.classList.add('animation__close');
     window.removeEventListener('scroll', scrollToTop);
     setTimeout(removeClasses, 500, formOfButton);
@@ -97,15 +97,15 @@ function addCard(name, link) {
         document.querySelector('.footer').after(newPopupElement);
         window.scrollTo(scrollX, 0);
         window.addEventListener('scroll', scrollToTop);
-    })
+    });
     newCard.querySelector('.element__like').addEventListener('click', function(event){
         event.target.classList.toggle('element__like_active');
-    })
+    });
     newCard.querySelector('.element__delete').addEventListener('click', function(event){
         let element = event.target.closest('.element');
         element.classList.add('animation__close');
         setTimeout(() => element.remove(), 400);
-    })
+    });
     cardsContainer.prepend(newCard);
     cardsContainer.classList.add('animation__open');
     setTimeout(() => cardsContainer.classList.remove('animation__open'), 400);
@@ -117,9 +117,9 @@ function addCardForm(evt) {
     closePopup(this);
     inputNewCardName.value = '';
     inputNewCardLink.value = '';
-}
+};
 //Add initial card
-elementsInitial.forEach(el => addCard(el.name, el.link))
+elementsInitial.forEach(el => addCard(el.name, el.link));
 
 //Profile Buttons
 buttonOpenPopupProfile.addEventListener('click', openPopupProfile);
