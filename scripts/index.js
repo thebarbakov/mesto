@@ -22,7 +22,7 @@ const elementsInitial = [
     name: 'Домбай',
     link: './images/photos/dombay.jpg'}];
 const cardTemplate = document.querySelector('#card').content;
-const popupNewCard = container.querySelector('.popup__new-card');
+const popupNewCard = container.querySelector('.popup_new-card');
 const buttonAddCard = container.querySelector('.profile__button-add');
 const buttonClosePopupNewCard = popupNewCard.querySelector('.popup__button-close');
 const formNewCard = popupNewCard.querySelector('.popup__form');
@@ -31,13 +31,13 @@ let inputNewCardName = popupNewCard.querySelector("#card-name-input");
 let inputNewCardLink = popupNewCard.querySelector("#card-link-input");
 
 //Element Popup
-const popupElement = container.querySelector('.popup__element');
+const popupElement = container.querySelector('.popup_element');
 const popupElementButton = popupElement.querySelector('.popup__button-close')
 let popupElementImage = popupElement.querySelector('.popup__image')
 let popupElementDescription = popupElement.querySelector('.popup__description');
 
 //Profile
-const popupProfile = container.querySelector('.popup__profile');
+const popupProfile = container.querySelector('.popup_profile');
 const buttonClosePopupProfile = popupProfile.querySelector('.popup__button-close');
 const buttonOpenPopupProfile = container.querySelector('.profile__button-edit');
 const formProfile = popupProfile.querySelector('.popup__form');
