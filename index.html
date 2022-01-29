@@ -32,7 +32,7 @@
         <footer class="footer">
             <p class="footer__copyright">© 2022 Mesto Russia</p>
         </footer>
-        <div class="popup" id="popup-profile">
+        <div class="popup popup__profile">
             <div class="popup__container">
                 <button class="popup__button-close" type="button" id="button-close-profile"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
@@ -43,7 +43,7 @@
                 </form>
             </div>
         </div>
-        <div class="popup" id="popup-new-card">
+        <div class="popup popup__new-card" >
             <div class="popup__container">
                 <button class="popup__button-close" type="button" id="button-close-new-card"></button>
                 <h2 class="popup__title">Новое место</h2>
@@ -54,6 +54,13 @@
                 </form>
             </div>
         </div>
+        <div class="popup popup__element popup_darker">
+            <figure class="popup__box-image">
+                <button class="popup__button-close" type="button"></button>
+                <img class="popup__image" src="" alt="">
+                <figcaption class="popup__description">Домбай</figcaption>
+            </figure>
+        </div>
         <template id="card">
             <div class="element">
                 <img class="element__image" src="#" alt="#">
@@ -62,15 +69,6 @@
                     <button class="element__like" type="button"></button>
                 </div>
                 <button class="element__delete" type="button"></button>
-            </div>
-        </template>
-        <template id="popup-element">
-            <div class="popup popup_darker popup_opened">
-                <figure class="popup__box-image">
-                    <button class="popup__button-close" type="button"></button>
-                    <img class="popup__image" src="./images/photos/dombay.png" alt="">
-                    <figcaption class="popup__description">Домбай</figcaption>
-                </figure>
             </div>
         </template>
         <script src="./scripts/index.js"></script>
