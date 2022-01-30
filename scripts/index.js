@@ -94,13 +94,13 @@ function createCard(name, link) {
     newCard.querySelector('.element__image').setAttribute('alt', name);
     newCard.querySelector('.element__like').addEventListener('click',(event => event.target.classList.toggle('element__like_active')));
     newCard.querySelector('.element__delete').addEventListener('click', function(event){
-        let element = event.target.closest('.element');
+        const element = event.target.closest('.element');
         element.classList.add('animation__close');
         setTimeout(() => element.remove(), 400);
     });
     newCard.querySelector('.element__image').addEventListener('click', function () {
-        let nameTo = name;
-        let linkTo = link;
+        const nameTo = name;
+        const linkTo = link;
         openPopupElement(nameTo, linkTo)
     });
     return newCard;
