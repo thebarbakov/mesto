@@ -26,7 +26,7 @@ const popupNewCard = container.querySelector('.popup_new-card');
 const buttonAddCard = container.querySelector('.profile__button-add');
 const buttonClosePopupNewCard = popupNewCard.querySelector('.popup__button-close');
 const formNewCard = popupNewCard.querySelector('.popup__form');
-let cardsContainer = container.querySelector('.elements');
+const cardsContainer = container.querySelector('.elements');
 let inputNewCardName = popupNewCard.querySelector("#card-name-input");
 let inputNewCardLink = popupNewCard.querySelector("#card-link-input");
 
@@ -59,13 +59,13 @@ function openPopup(popup) {
     popup.classList.add('animation__open');
     popup.classList.add('popup_opened');
 }
-
+//Function for closinh all popups
 function closePopup(event) {
     function removeClasses(formOfButton) {
         formOfButton.classList.remove('popup_opened');
         formOfButton.classList.remove('animation__close');
     }
-    let formOfButton = event.parentElement.parentElement;
+    let formOfButton = event.closest('.popup');
     formOfButton.classList.remove('animation__open');
     formOfButton.classList.add('animation__close');
     window.removeEventListener('scroll', scrollToTop);
