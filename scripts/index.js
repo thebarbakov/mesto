@@ -27,24 +27,24 @@ const buttonAddCard = container.querySelector('.profile__button-add');
 const buttonClosePopupNewCard = popupNewCard.querySelector('.popup__button-close');
 const formNewCard = popupNewCard.querySelector('.popup__form');
 const cardsContainer = container.querySelector('.elements');
-let inputNewCardName = popupNewCard.querySelector("#card-name-input");
-let inputNewCardLink = popupNewCard.querySelector("#card-link-input");
+const inputNewCardName = popupNewCard.querySelector("#card-name-input");
+const inputNewCardLink = popupNewCard.querySelector("#card-link-input");
 
 //Element Popup
 const popupElement = container.querySelector('.popup_element');
 const popupElementButton = popupElement.querySelector('.popup__button-close')
-let popupElementImage = popupElement.querySelector('.popup__image')
-let popupElementDescription = popupElement.querySelector('.popup__description');
+const popupElementImage = popupElement.querySelector('.popup__image')
+const popupElementDescription = popupElement.querySelector('.popup__description');
 
 //Profile
 const popupProfile = container.querySelector('.popup_profile');
 const buttonClosePopupProfile = popupProfile.querySelector('.popup__button-close');
 const buttonOpenPopupProfile = container.querySelector('.profile__button-edit');
 const formProfile = popupProfile.querySelector('.popup__form');
-let blockName = container.querySelector('.profile__name');
-let blockJob = container.querySelector('.profile__job');
-let inputProfileName = popupProfile.querySelector("#profile-name-input");
-let inputProfileJob = popupProfile.querySelector("#profile-job-input");
+const blockName = container.querySelector('.profile__name');
+const blockJob = container.querySelector('.profile__job');
+const inputProfileName = popupProfile.querySelector("#profile-name-input");
+const inputProfileJob = popupProfile.querySelector("#profile-job-input");
 
 //Block scrolling 
 const scrollToTop = () => window.scrollTo(scrollX, 0, );
@@ -59,17 +59,16 @@ function openPopup(popup) {
     popup.classList.add('animation__open');
     popup.classList.add('popup_opened');
 }
-//Function for closinh all popups
-function closePopup(event) {
-    function removeClasses(formOfButton) {
-        formOfButton.classList.remove('popup_opened');
-        formOfButton.classList.remove('animation__close');
+//Close popups
+function closePopup(popup) {
+    function removeClasses(popup) {
+        popup.classList.remove('popup_opened');
+        popup.classList.remove('animation__close');
     }
-    let formOfButton = event.closest('.popup');
-    formOfButton.classList.remove('animation__open');
-    formOfButton.classList.add('animation__close');
+    popup.classList.remove('animation__open');
+    popup.classList.add('animation__close');
     window.removeEventListener('scroll', scrollToTop);
-    setTimeout(removeClasses, 500, formOfButton);
+    setTimeout(removeClasses, 500, popup);
 }
 
 //Popup Profile
@@ -84,7 +83,7 @@ function editProfileForm(evt) {
     evt.preventDefault();
     blockName.innerText = inputProfileName.value;
     blockJob.innerText = inputProfileJob.value;
-    closePopup(this);
+    closePopup(popupProfile);
 }
 
 //Popup Card
@@ -123,7 +122,7 @@ function openPopupNewCard() {
 function addCardForm(evt) {
     evt.preventDefault();
     cardsContainer.prepend(createCard(inputNewCardName.value, inputNewCardLink.value));
-    closePopup(this);
+    closePopup(popupNewCard);
     inputNewCardName.value = '';
     inputNewCardLink.value = '';
 };
@@ -134,13 +133,13 @@ createdInitialCards.forEach(element => cardsContainer.prepend(element));
 
 //Profile Buttons
 buttonOpenPopupProfile.addEventListener('click', openPopupProfile);
-buttonClosePopupProfile.addEventListener('click', function(event){closePopup(event.target)});
+buttonClosePopupProfile.addEventListener('click', (event => closePopup(popupProfile)));
 formProfile.addEventListener('submit', editProfileForm); 
 
 //New Card Buttons 
 buttonAddCard.addEventListener('click', openPopupNewCard);
-buttonClosePopupNewCard.addEventListener('click', function(event){closePopup(event.target)});
+buttonClosePopupNewCard.addEventListener('click', (event => closePopup(popupNewCard)));
 formNewCard.addEventListener('submit', addCardForm); 
 
 //Popup Element Buttons
-popupElementButton.addEventListener('click', function(event){closePopup(event.target)});
+popupElementButton.addEventListener('click', (event => closePopup(popupElement)));
