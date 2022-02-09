@@ -36,23 +36,49 @@
             <div class="popup__container">
                 <button class="popup__button-close" type="button" id="button-close-profile"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form" name="popupProfile">
-                    <input class="popup__input" type="text" id="profile-name-input" name="profile-name" placeholder="Имя">
-                    <input class="popup__input" type="text" id="profile-job-input" name="profile-job" placeholder="Работа">
-                    <button type="submit" class="popup__button-save">Сохранить</button>
+                <form class="popup__form" name="popupProfile" novalidate>
+                    <fieldset class="popup__set">
+                        <!-- <input class="popup__input" type="text" id="profile-name-input" name="profile-name" placeholder="Имя"> -->
+                        <label class="popup__field">
+                            <input type="text" class="popup__input" id="profile-name-input" name="profile-name" 
+                            placeholder="Имя" required minlength="2" maxlength="40">
+                            <span class="popup__input-error profile-name-input-error"></span>
+                        </label>
+                        <!-- <input class="popup__input" type="text" id="profile-job-input" name="profile-job" placeholder="Работа"> -->
+                        <label class="popup__field">
+                            <input type="text" class="popup__input" id="profile-job-input" name="profile-job" 
+                            placeholder="Работа" required required minlength="2" maxlength="200">
+                            <span class="popup__input-error profile-job-input-error"></span>
+                        </label>
+                        <button type="submit" class="popup__button-save">Сохранить</button>
+                    </fieldset>  
                 </form>
             </div>
+            <div class="popup__overlay"></div>
         </div>
         <div class="popup popup_new-card" >
             <div class="popup__container">
                 <button class="popup__button-close" type="button" id="button-close-new-card"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <form class="popup__form" name="popupNewCard">
-                    <input class="popup__input" type="text" id="card-name-input" name="card-name" placeholder="Название">
-                    <input class="popup__input" type="text" id="card-link-input" name="card-link" placeholder="Ссылка на картинку">
-                    <button type="submit" class="popup__button-save">Создать</button>
+                <form class="popup__form" name="popupNewCard" novalidate>
+                    <fieldset class="popup__set">
+                        <!-- <input class="popup__input" type="text" id="card-name-input" name="card-name" placeholder="Название"> -->
+                        <label class="popup__field">
+                            <input type="text" class="popup__input" id="card-name-input" name="card-name" 
+                        placeholder="Название" required minlength="2" maxlength="30">
+                            <span class="popup__input-error card-name-input-error"></span>
+                        </label>
+                        <!-- <input class="popup__input" type="text" id="card-link-input" name="card-link" placeholder="Ссылка на картинку"> -->
+                        <label class="popup__field">
+                            <input type="url" class="popup__input" id="card-link-input" name="card-link" 
+                            placeholder="Ссылка на картинку" required>
+                            <span class="popup__input-error card-link-input-error"></span>
+                        </label>
+                        <button type="submit" class="popup__button-save">Создать</button>
+                    </fieldset>   
                 </form>
             </div>
+            <div class="popup__overlay"></div>
         </div>
         <div class="popup popup_element">
             <figure class="popup__box-image">
@@ -60,6 +86,7 @@
                 <img class="popup__image" src="#" alt="#">
                 <figcaption class="popup__description"></figcaption>
             </figure>
+            <div class="popup__overlay"></div>
         </div>
         <template id="card">
             <div class="element">
@@ -72,5 +99,6 @@
             </div>
         </template>
         <script src="./scripts/index.js"></script>
+        <script src="./scripts/validate.js"></script>
     </body>
 </html>

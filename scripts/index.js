@@ -1,5 +1,6 @@
 //Root
 const container = document.querySelector('.root');
+let popupNow;
 
 //Cards
 const elementsInitial = [
@@ -29,6 +30,7 @@ const formNewCard = popupNewCard.querySelector('.popup__form');
 const cardsContainer = container.querySelector('.elements');
 const inputNewCardName = popupNewCard.querySelector("#card-name-input");
 const inputNewCardLink = popupNewCard.querySelector("#card-link-input");
+const popupCardButtonSave = popupNewCard.querySelector(".popup__button-save");
 
 //Element Popup
 const popupElement = container.querySelector('.popup_element');
@@ -45,6 +47,7 @@ const blockName = container.querySelector('.profile__name');
 const blockJob = container.querySelector('.profile__job');
 const inputProfileName = popupProfile.querySelector("#profile-name-input");
 const inputProfileJob = popupProfile.querySelector("#profile-job-input");
+const popupProfileButtonSave = popupProfile.querySelector(".popup__button-save");
 
 //Block scrolling 
 const scrollToTop = () => window.scrollTo(scrollX, 0, );
@@ -55,10 +58,20 @@ function blockScrolling(){
 };
 
 //Popup Global
+const closePopupByEsc = (evt) => {
+    if (evt.key === 'Escape') {
+       closePopup(popupNow);
+     }
+} 
 function openPopup(popup) {
+    const popupOverlay = popup.querySelector('.popup__overlay');
+    popupOverlay.addEventListener('click', (event => closePopup(popup)));
     popup.classList.add('animation__open');
     popup.classList.add('popup_opened');
+    container.addEventListener('keydown', closePopupByEsc);
+    popupNow = popup;
 }
+
 //Close popups
 function closePopup(popup) {
     function removeClasses(popup) {
@@ -68,6 +81,7 @@ function closePopup(popup) {
     popup.classList.remove('animation__open');
     popup.classList.add('animation__close');
     window.removeEventListener('scroll', scrollToTop);
+    container.removeEventListener('keydown', closePopupByEsc);
     setTimeout(removeClasses, 500, popup);
 }
 
@@ -84,6 +98,7 @@ function editProfileForm(evt) {
     blockName.innerText = inputProfileName.value;
     blockJob.innerText = inputProfileJob.value;
     closePopup(popupProfile);
+    popupProfileButtonSave.classList.add('popup__button-save_disabled')
 }
 
 //Popup Card
@@ -125,6 +140,7 @@ function addCardForm(evt) {
     closePopup(popupNewCard);
     inputNewCardName.value = '';
     inputNewCardLink.value = '';
+    popupCardButtonSave.classList.add('popup__button-save_disabled')
 };
 
 //Add initial card
@@ -143,3 +159,5 @@ formNewCard.addEventListener('submit', addCardForm);
 
 //Popup Element Buttons
 popupElementButton.addEventListener('click', (event => closePopup(popupElement)));
+
+//Popup overlays 
