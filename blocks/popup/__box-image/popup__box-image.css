@@ -3,4 +3,5 @@
     position: relative;
     flex-direction: column;
     margin: 0;
+    z-index: 10;
 }
