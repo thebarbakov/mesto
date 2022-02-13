@@ -1,6 +1,6 @@
 //Root
 const container = document.querySelector('.root');
-let popupNow;
+const runWithDelay = (func, prop) => setTimeout(func, 500, prop);
 
 //Cards
 const elementsInitial = [
@@ -60,7 +60,8 @@ function blockScrolling(){
 //Popup Global
 const closePopupByEsc = (evt) => {
     if (evt.key === 'Escape') {
-       closePopup(popupNow);
+        const popupActive = container.querySelector('.popup_opened');
+       closePopup(popupActive);
      }
 } 
 function openPopup(popup) {
@@ -73,16 +74,18 @@ function openPopup(popup) {
 }
 
 //Close popups
+
+function removeClasses(popup) {
+    popup.classList.remove('popup_opened');
+    popup.classList.remove('animation__close');
+}
+
 function closePopup(popup) {
-    function removeClasses(popup) {
-        popup.classList.remove('popup_opened');
-        popup.classList.remove('animation__close');
-    }
     popup.classList.remove('animation__open');
     popup.classList.add('animation__close');
     window.removeEventListener('scroll', scrollToTop);
     container.removeEventListener('keydown', closePopupByEsc);
-    setTimeout(removeClasses, 500, popup);
+    runWithDelay(removeClasses, popup)
 }
 
 //Popup Profile
@@ -111,7 +114,8 @@ function createCard(name, link) {
     newCard.querySelector('.element__delete').addEventListener('click', function(event){
         const element = event.target.closest('.element');
         element.classList.add('animation__close');
-        setTimeout(() => element.remove(), 400);
+        const removeElement = () => element.remove();
+        runWithDelay(removeElement)
     });
     newCard.querySelector('.element__image').addEventListener('click', function () {
         const nameTo = name;
@@ -138,8 +142,7 @@ function addCardForm(evt) {
     evt.preventDefault();
     cardsContainer.prepend(createCard(inputNewCardName.value, inputNewCardLink.value));
     closePopup(popupNewCard);
-    inputNewCardName.value = '';
-    inputNewCardLink.value = '';
+    formNewCard.reset();
     popupCardButtonSave.classList.add('popup__button-save_disabled')
 };
 
