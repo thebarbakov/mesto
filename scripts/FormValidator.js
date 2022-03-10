@@ -1,5 +1,3 @@
-import {runWithDelay} from './index.js'
-
 class FormValidator {
     constructor(config, form) {
         this._config = config,
@@ -50,26 +48,18 @@ class FormValidator {
 
     _showInputError(formElement, inputElement, errorMessage) {
         const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-        const removeClass = (errorElement) => {
-          errorElement.classList.remove(this._config.animationOpenClass);
-        }
         errorElement.classList.add(this._config.animationOpenClass);
         errorElement.classList.add(this._config.inputErrorClass);
         inputElement.classList.add(this._config.inputWindowErrorClass)
         errorElement.textContent = errorMessage;
-        runWithDelay(removeClass, errorElement)
     };
 
     _hideInputError(formElement, inputElement) {
         const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-        const hideAfterDelayError = (errorElement) => {
-          errorElement.classList.remove(this._config.inputErrorClass);
-          errorElement.classList.remove(this._config.animationCloseClass);
-          errorElement.textContent = '';
-      }
         errorElement.classList.add(this._config.animationCloseClass);
         inputElement.classList.remove(this._config.inputWindowErrorClass)
-        setTimeout(hideAfterDelayError, 500, errorElement);
+        errorElement.classList.remove(this._config.inputErrorClass);
+        errorElement.textContent = '';
     };
 
 }

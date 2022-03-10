@@ -2,7 +2,29 @@ import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 //Root
 const container = document.querySelector('.root');
-const runWithDelay = (func, prop) => setTimeout(func, 500, prop);
+const popupOverlay = document.querySelectorAll('.popup__overlay');
+popupOverlay.forEach((element)=>{
+    const popup = element.closest('.popup')
+    console.log(popup)
+    element.addEventListener('click', (event => closePopup(popup)));
+})
+
+const formsArray = document.querySelectorAll('.popup__form')
+formsArray.forEach( form =>{
+    const formValidator = new FormValidator({
+        formSelector: '.popup__form',
+        inputSelector: '.popup__input',
+        fieldsetList: '.popup__set',
+        submitButtonSelector: '.popup__button-save',
+        inactiveButtonClass: 'popup__button-save_disabled',
+        inputErrorClass: 'popup__input-error_active',
+        inputWindowErrorClass: 'popup__input_error',
+        animationOpenClass: 'animation__open',
+        animationCloseClass: 'animation__close'
+    }, form)
+
+    formValidator.enableValidation();
+})
 
 //Cards
 const elementsInitial = [
@@ -13,7 +35,7 @@ const elementsInitial = [
     name: 'Карелия',
     link: './images/photos/karelia.jpg'},
     {
-     name: 'Сочи',
+     name: 'Адлер',
     link: './images/photos/sochi.jpg'},
     {
     name: 'Камчатка',
@@ -51,15 +73,7 @@ const inputProfileName = popupProfile.querySelector("#profile-name-input");
 const inputProfileJob = popupProfile.querySelector("#profile-job-input");
 const popupProfileButtonSave = popupProfile.querySelector(".popup__button-save");
 
-//Block scrolling 
-const scrollToTop = () => window.scrollTo(scrollX, 0, );
-
-const blockScrolling = () => {
-    scrollToTop();
-    window.addEventListener('scroll', scrollToTop);
-};
-
-export { popupElement, popupElementImage, popupElementDescription, openPopup, runWithDelay };
+export { popupElement, popupElementImage, popupElementDescription, openPopup };
 
 //Popup Global
 const closePopupByEsc = (evt) => {
@@ -69,27 +83,15 @@ const closePopupByEsc = (evt) => {
      }
 } 
 function openPopup(popup) {
-    blockScrolling();
-    const popupOverlay = popup.querySelector('.popup__overlay');
-    popupOverlay.addEventListener('click', (event => closePopup(popup)));
-    popup.classList.add('animation__open');
     popup.classList.add('popup_opened');
     container.addEventListener('keydown', closePopupByEsc);
 }
 
 //Close popups
 
-function removeClasses(popup) {
-    popup.classList.remove('popup_opened');
-    popup.classList.remove('animation__close');
-}
-
 function closePopup(popup) {
-    popup.classList.remove('animation__open');
-    popup.classList.add('animation__close');
-    window.removeEventListener('scroll', scrollToTop);
+    popup.classList.remove('popup_opened');
     container.removeEventListener('keydown', closePopupByEsc);
-    runWithDelay(removeClasses, popup)
 }
 
 //Popup Profile
@@ -101,10 +103,9 @@ function openPopupProfile() {
 
 function editProfileForm(evt) {
     evt.preventDefault();
-    blockName.innerText = inputProfileName.value;
-    blockJob.innerText = inputProfileJob.value;
+    blockName.textContent = inputProfileName.value;
+    blockJob.textContent = inputProfileJob.value;
     closePopup(popupProfile);
-    popupProfileButtonSave.classList.add('popup__button-save_disabled')
 }
 
 function addCardForm(evt) {
@@ -137,22 +138,4 @@ formNewCard.addEventListener('submit', addCardForm);
 
 //Popup Element Buttons
 popupElementButton.addEventListener('click', (event => closePopup(popupElement)));
-
-//Enable Validation 
-const formsArray = document.querySelectorAll('.popup__form')
-formsArray.forEach( form =>{
-    const formValidator = new FormValidator({
-        formSelector: '.popup__form',
-        inputSelector: '.popup__input',
-        fieldsetList: '.popup__set',
-        submitButtonSelector: '.popup__button-save',
-        inactiveButtonClass: 'popup__button-save_disabled',
-        inputErrorClass: 'popup__input-error_active',
-        inputWindowErrorClass: 'popup__input_error',
-        animationOpenClass: 'animation__open',
-        animationCloseClass: 'animation__close'
-    }, form)
-
-    formValidator.enableValidation();
-})
 
