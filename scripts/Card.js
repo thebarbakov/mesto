@@ -27,9 +27,7 @@ class Card{
         this._element.querySelector('.element__like').addEventListener('click',(e => e.target.classList.toggle('element__like_active')));
 
         this._element.querySelector('.element__delete').addEventListener('click', function(e){
-        e.target.closest('.element').classList.add('animation__close');
-        const removeElement = () => e.target.closest('.element').remove();
-        runWithDelay(removeElement)
+        e.target.closest('.element').remove();
         });
 
         this._element.querySelector('.element__image').addEventListener('click', (e) => this._handleOpenPopup());

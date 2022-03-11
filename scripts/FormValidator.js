@@ -48,7 +48,6 @@ class FormValidator {
 
     _showInputError(formElement, inputElement, errorMessage) {
         const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-        errorElement.classList.add(this._config.animationOpenClass);
         errorElement.classList.add(this._config.inputErrorClass);
         inputElement.classList.add(this._config.inputWindowErrorClass)
         errorElement.textContent = errorMessage;
@@ -56,7 +55,6 @@ class FormValidator {
 
     _hideInputError(formElement, inputElement) {
         const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-        errorElement.classList.add(this._config.animationCloseClass);
         inputElement.classList.remove(this._config.inputWindowErrorClass)
         errorElement.classList.remove(this._config.inputErrorClass);
         errorElement.textContent = '';

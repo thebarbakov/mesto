@@ -5,7 +5,6 @@ const container = document.querySelector('.root');
 const popupOverlay = document.querySelectorAll('.popup__overlay');
 popupOverlay.forEach((element)=>{
     const popup = element.closest('.popup')
-    console.log(popup)
     element.addEventListener('click', (event => closePopup(popup)));
 })
 
@@ -19,8 +18,6 @@ formsArray.forEach( form =>{
         inactiveButtonClass: 'popup__button-save_disabled',
         inputErrorClass: 'popup__input-error_active',
         inputWindowErrorClass: 'popup__input_error',
-        animationOpenClass: 'animation__open',
-        animationCloseClass: 'animation__close'
     }, form)
 
     formValidator.enableValidation();
@@ -46,7 +43,6 @@ const elementsInitial = [
     {
     name: 'Домбай',
     link: './images/photos/dombay.jpg'}];
-const cardTemplate = document.querySelector('#card').content;
 const popupNewCard = container.querySelector('.popup_new-card');
 const buttonAddCard = container.querySelector('.profile__button-add');
 const buttonClosePopupNewCard = popupNewCard.querySelector('.popup__button-close');
@@ -71,7 +67,6 @@ const blockName = container.querySelector('.profile__name');
 const blockJob = container.querySelector('.profile__job');
 const inputProfileName = popupProfile.querySelector("#profile-name-input");
 const inputProfileJob = popupProfile.querySelector("#profile-job-input");
-const popupProfileButtonSave = popupProfile.querySelector(".popup__button-save");
 
 export { popupElement, popupElementImage, popupElementDescription, openPopup };
 
