@@ -1,10 +1,9 @@
-import { popupElement, popupElementImage, popupElementDescription, openPopup } from './index.js'
-
 class Card{
-    constructor(data, cardSelector){
+    constructor(data, cardSelector, handleCardClick){
         this.name = data.name;
         this.link = data.link;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -30,14 +29,7 @@ class Card{
         e.target.closest('.element').remove();
         });
 
-        this._element.querySelector('.element__image').addEventListener('click', (e) => this._handleOpenPopup());
-    }
-
-    _handleOpenPopup() {
-        popupElementImage.setAttribute('src', this.link); 
-        popupElementImage.setAttribute('alt', this.name);
-        popupElementDescription.textContent = this.name;
-        openPopup(popupElement);
+        this._element.querySelector('.element__image').addEventListener('click', (e) => this._handleCardClick());
     }
 
 }
