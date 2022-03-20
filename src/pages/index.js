@@ -22,48 +22,41 @@ formsArray.forEach( form =>{
     formValidator.enableValidation();
 })
 
-const initialCard = new Section({
+const cardPopup = new PopupWithImage('.popup_element')
+
+const createCard = (item) => {
+    const newCard = new Card(item, '#card', ({name, link}) => {
+        cardPopup.openPopup({name, link})
+    })
+    const newCardElement = newCard.generateCard()
+    return newCardElement;
+}
+
+const cardList = new Section({
     items: elementsInitial,
-    renderer: (item) =>{
-        const initCard = new Card(item, '#card', () => {
-            console.log({name: initCard.name, link: initCard.link})
-            const cardPopup = new PopupWithImage('.popup_element', {name: initCard.name, link: initCard.link})
-            cardPopup.openPopup()
-        })
-        const cardElement = initCard.generateCard()
-        initialCard.addItem(cardElement)
+    renderer: (item) => {
+        cardList.addItem(createCard(item))
     }
 }, '.elements')
 
-initialCard.render();
+cardList.render();
 
 const userInfo = new UserInfo({
     selectorName: '.profile__name',
     selectorJob: '.profile__job'
 })
 
-const profilePopup = new PopupWithForm('.popup_profile', (e) => {
-    e.preventDefault();
-    userInfo.setUserInfo(profilePopup._getInputValues())
-    profilePopup.closePopup();
-})
+const profilePopup = new PopupWithForm('.popup_profile', (data) => { 
+    userInfo.setUserInfo(data) 
+    profilePopup.closePopup(); 
+})  
 
-const newCardForm = new PopupWithForm('.popup_new-card', (e) => {
-    e.preventDefault();
-    const newCard = new Section({
-        items: [newCardForm._getInputValues()],
-        renderer: (item) =>{
-            const newItem = new Card({name: item.cardName, link: item.cardLink}, '#card',() => {
-                const cardPopup = new PopupWithImage('.popup_element', {name: newItem.name, link: newItem.link})
-                cardPopup.openPopup()
-            })
-            const newItemElement = newItem.generateCard()
-            newCard.addItem(newItemElement)
-        }
-    }, '.elements')
-    newCard.render();
+const newCardForm = new PopupWithForm('.popup_new-card', (data) => {
+    cardList.addItem(createCard({name: data.cardName, link: data.cardLink}))
     newCardForm.closePopup();
 })
+
+
 
 //Buttons
 

@@ -4,10 +4,11 @@ class PopupWithForm extends Popup {
         super(popupSelector);
         this._submitCallback = submitCallback
         this._hasEventListeners = false
+        this._inputList = super.getPopup().querySelectorAll('.popup__input')
+        this._form =  this.getPopup().querySelector('.popup__form')
     }
 
     _getInputValues(){
-        this._inputList = super._getPopup().querySelectorAll('.popup__input')
         this._formValues = {};
         this._inputList.forEach(input => {
             this._formValues[input.name] = input.value;
@@ -16,16 +17,18 @@ class PopupWithForm extends Popup {
     }
 
     closePopup(){
-        this._getPopup().classList.remove('popup_opened');
+        super.closePopup()
         window.removeEventListener('keydown', e => this._handleEscClose());
-        this._getPopup().querySelector('.popup__form').reset();
+        this._form.reset();
     }
 
     setEventListeners(){
         this._hasEventListeners = true
-        this._getPopup().querySelector('.popup__button-close').addEventListener('click', e => this.closePopup());
-        this._getPopup().querySelector('.popup__overlay').addEventListener('click', e => this.closePopup());
-        this._getPopup().querySelector('.popup__form').addEventListener('submit', e => this._submitCallback(e));
+        super.setEventListeners()
+        this._form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this._submitCallback(this._getInputValues())
+        }); 
     }
 
 }

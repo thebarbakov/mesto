@@ -1,19 +1,16 @@
 import { Popup } from './Popup.js'
 class PopupWithImage extends Popup {
-    constructor(popupSelector, {name, link}){
+    constructor(popupSelector){
         super(popupSelector);
-        this._name = name
-        this._link = link
         this._hasEventListeners = false
     }
 
-    openPopup(){
-        if (!this._hasEventListeners) {super.setEventListeners()}
-        super._getPopup().querySelector('.popup__image').setAttribute('src', this._link); 
-        super._getPopup().querySelector('.popup__image').setAttribute('alt', this._name);
-        super._getPopup().querySelector('.popup__description').textContent = this._name;
-        super._getPopup().classList.add('popup_opened');
-        window.addEventListener('keydown', e => this._handleEscClose(e));
+    openPopup({name, link}){
+        const image = super.getPopup().querySelector('.popup__image')
+        image.setAttribute('src', link); 
+        image.setAttribute('alt', name);
+        super.getPopup().querySelector('.popup__description').textContent = name;
+        super.openPopup()
     }
 }
 

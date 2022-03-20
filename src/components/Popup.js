@@ -4,19 +4,19 @@ class Popup{
         this._hasEventListeners = false //Чтоб прослушиватели событий добавлялись только один раз.
     }
 
-    _getPopup(){
+    getPopup(){
         return document.querySelector(this._popupSelector)
     }
 
     openPopup(){
         if (!this._hasEventListeners) {this.setEventListeners()}
-        this._getPopup().classList.add('popup_opened');
-        window.addEventListener('keydown', e => this._handleEscClose(e));
+        this.getPopup().classList.add('popup_opened');
+        document.addEventListener('keydown', this._handleEscClose.bind(this));
     }
 
     closePopup(){
-        this._getPopup().classList.remove('popup_opened');
-        window.removeEventListener('keydown', e => this._handleEscClose(e));
+        this.getPopup().classList.remove('popup_opened');
+        document.removeEventListener('keydown', this._handleEscClose);
     }
 
     _handleEscClose(e){
@@ -27,9 +27,8 @@ class Popup{
 
     setEventListeners(){
         this._hasEventListeners = true
-        this._getPopup().querySelector('.popup__button-close').addEventListener('click', e => this.closePopup());
-        this._getPopup().querySelector('.popup__overlay').addEventListener('click', e => this.closePopup());
-        this._getPopup().querySelector('.popup__overlay').addEventListener('click', e => this.closePopup());
+        this.getPopup().querySelector('.popup__button-close').addEventListener('click', e => this.closePopup());
+        this.getPopup().querySelector('.popup__overlay').addEventListener('click', e => this.closePopup());
     }
 }
 
