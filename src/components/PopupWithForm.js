@@ -5,7 +5,8 @@ class PopupWithForm extends Popup {
         this._submitCallback = submitCallback
         this._hasEventListeners = false
         this._inputList = super.getPopup().querySelectorAll('.popup__input')
-        this._form =  this.getPopup().querySelector('.popup__form')
+        this._form =  super.getPopup().querySelector('.popup__form')
+        this.submitButton =  super.getPopup().querySelector('.popup__button-save')
     }
 
     _getInputValues(){
@@ -18,7 +19,6 @@ class PopupWithForm extends Popup {
 
     closePopup(){
         super.closePopup()
-        window.removeEventListener('keydown', e => this._handleEscClose());
         this._form.reset();
     }
 

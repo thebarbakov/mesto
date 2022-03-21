@@ -53,6 +53,7 @@ const profilePopup = new PopupWithForm('.popup_profile', (data) => {
 
 const newCardForm = new PopupWithForm('.popup_new-card', (data) => {
     cardList.addItem(createCard({name: data.cardName, link: data.cardLink}))
+    newCardForm.submitButton.classList.add('popup__button-save_disabled');
     newCardForm.closePopup();
 })
 
