@@ -8,8 +8,9 @@ import { UserInfo } from '../components/UserInfo.js'
 import { elementsInitial } from '../utils/constants.js'
 
 const formsArray = document.querySelectorAll('.popup__form')
-formsArray.forEach( form =>{
-    const formValidator = new FormValidator({
+const formValidator = {};
+formsArray.forEach( (form) =>{
+        formValidator[form.getAttribute('name')] = new FormValidator({
         formSelector: '.popup__form',
         inputSelector: '.popup__input',
         fieldsetList: '.popup__set',
@@ -19,7 +20,7 @@ formsArray.forEach( form =>{
         inputWindowErrorClass: 'popup__input_error',
     }, form)
 
-    formValidator.enableValidation();
+    formValidator[form.getAttribute('name')].enableValidation();
 })
 
 const cardPopup = new PopupWithImage('.popup_element')
@@ -53,8 +54,9 @@ const profilePopup = new PopupWithForm('.popup_profile', (data) => {
 
 const newCardForm = new PopupWithForm('.popup_new-card', (data) => {
     cardList.addItem(createCard({name: data.cardName, link: data.cardLink}))
-    newCardForm.submitButton.classList.add('popup__button-save_disabled');
     newCardForm.closePopup();
+    formValidator.popupNewCard.toggleButtonState(Array.from(newCardForm.getPopup().querySelectorAll('.popup__input')),
+    newCardForm.getPopup().querySelector('.popup__button-save'))
 })
 
 
