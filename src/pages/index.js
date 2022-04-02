@@ -44,30 +44,37 @@ const cardList = new Section(
 , '.elements')
 
 const createCard = (item) => {
-    const newCard = new Card(item, '#card', ({name, link}) => {
+    const newCard = new Card(item, '#card', 
+    ({name, link}) => {
         cardPopup.openPopup({name, link})
-    }, userId, (cardId, element) => {
+    },
+    userId,
+    (cardId, element) => { // HandeCardDelete
         deletePopup.setSubmitAction(() => {
             api.deleteCard(cardId, formValidator.cardDelete).then(element.remove())
             deletePopup.closePopup();
         })
         deletePopup.openPopup()
-        }, (element, cardId, likes) => {
-            element.querySelector('.like__button').addEventListener('click',(e => {
-                if(likes.find( el => el._id == userId)){
-                    api.setRemoveLike(cardId)
-                    .then((res) => {
-                    })
-                } else {
-                    api.setCardLike(cardId)
-                    .then((res) => {
-                        likes = res.likes
-                        element.querySelector('.like__counter').textContent = res.likes.length
-                        element.querySelector('.like__button').classList.add('like__button_active')
-                    })
-                }
-            }));
-        })
+    },
+    (element, cardId, likes) => { //HandleCardLike
+        element.querySelector('.like__button').addEventListener('click',(e => {
+            if(likes.find( el => el._id == userId)){
+                api.setRemoveLike(cardId)
+                .then((res) => {
+                    likes = res.likes
+                    element.querySelector('.like__counter').textContent = res.likes.length
+                    element.querySelector('.like__button').classList.remove('like__button_active')
+                })
+            } else {
+                api.setCardLike(cardId)
+                .then((res) => {
+                    likes = res.likes
+                    element.querySelector('.like__counter').textContent = res.likes.length
+                    element.querySelector('.like__button').classList.add('like__button_active')
+                })
+            }
+        }));
+    })
     const newCardElement = newCard.generateCard()
     return newCardElement;
 }

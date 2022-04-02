@@ -2,6 +2,7 @@ class Api{
     constructor(config){
         this._urlRequest = config.urlRequest
         this._headers = config.headers
+        this._loadingStart
     }
 
     _checkResponse(res) {
@@ -12,12 +13,15 @@ class Api{
     }
 
     renderLoading(isLoading, validateForm){
+        if(validateForm.buttonElement.textContent !== 'Сохранение...') {
+            this._loadingStart = validateForm.buttonElement.textContent
+        }
         if(isLoading){
             validateForm.disableSubmitButton()
             validateForm.buttonElement.textContent = 'Сохранение...'
         } else {
             validateForm.enableSubmitButton()
-            validateForm.buttonElement.textContent = 'Сохранено'
+            validateForm.buttonElement.textContent = this._loadingStart
         }
       }
 
@@ -37,6 +41,7 @@ class Api{
         })
         .then( res => this._checkResponse(res))
         .catch(rej => console.error((`Error: ${rej.status}`)))
+        
     }
 
     getInitialInfo(){
