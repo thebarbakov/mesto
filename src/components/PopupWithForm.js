@@ -22,6 +22,10 @@ class PopupWithForm extends Popup {
         this._form.reset();
     }
 
+    setSubmitAction(action){
+        this._submitCallback = action
+    }
+
     setEventListeners(){
         this._hasEventListeners = true
         super.setEventListeners()

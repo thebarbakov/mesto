@@ -16,11 +16,14 @@
         <main class="main">
             <section class="profile">
                 <div class="profile__block">
-                    <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
+                    <div class="profile__avatar">
+                        <img class="profile__photo" src="" alt="Аватар">
+                        <div class="profile__photo-overllay"></div>
+                    </div>
                     <div class="profile__info">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <h1 class="profile__name"></h1>
                         <button class="profile__button-edit" type="button"></button>
-                        <p class="profile__job">Исследователь океана</p>
+                        <p class="profile__job"></p>
                     </div>
                 </div>
                 <button class="profile__button-add" type="button"></button>
@@ -31,6 +34,35 @@
         <footer class="footer">
             <p class="footer__copyright">© 2022 Mesto Russia</p>
         </footer>
+        <div class="popup popup_delete">
+            <div class="popup__container">
+                <button class="popup__button-close" type="button" id="button-close-profile"></button>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <form class="popup__form" name="cardDelete" novalidate>
+                    <fieldset class="popup__set">
+                        <button type="submit" class="popup__button-save">Да</button>
+                    </fieldset>  
+                </form>
+            </div>
+            <div class="popup__overlay"></div>
+        </div>
+        <div class="popup popup_profile-avatar">
+            <div class="popup__container">
+                <button class="popup__button-close" type="button" id="button-close-profile"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__form" name="avatarUpdate" novalidate>
+                    <fieldset class="popup__set">
+                        <label class="popup__field">
+                            <input type="url" class="popup__input" id="profile-avatar-input" name="avatarLink" 
+                            placeholder="URL" required>
+                            <span class="popup__input-error profile-avatar-input-error"></span>
+                        </label>
+                        <button type="submit" class="popup__button-save">Сохранить</button>
+                    </fieldset>  
+                </form>
+            </div>
+            <div class="popup__overlay"></div>
+        </div>
         <div class="popup popup_profile">
             <div class="popup__container">
                 <button class="popup__button-close" type="button" id="button-close-profile"></button>
@@ -92,7 +124,10 @@
                 <img class="element__image" src="#" alt="#">
                 <div class="element__description">
                     <p class="element__title"></p>
-                    <button class="element__like" type="button"></button>
+                    <div class="element__like">
+                        <button class="like__button" type="button"></button>
+                        <p class="like__counter"></p>
+                    </div>
                 </div>
                 <button class="element__delete" type="button"></button>
             </div>
