@@ -3,6 +3,8 @@ class Api{
         this._urlRequest = config.urlRequest
         this._headers = config.headers
         this._loadingStart
+        this._disableButton = config.disableButton
+        this._enableButton = config.enableButton
     }
 
     _checkResponse(res) {
@@ -17,10 +19,11 @@ class Api{
             this._loadingStart = validateForm.buttonElement.textContent
         }
         if(isLoading){
+            this._disableButton(validateForm)
             validateForm.disableSubmitButton()
             validateForm.buttonElement.textContent = 'Сохранение...'
         } else {
-            validateForm.enableSubmitButton()
+            this._enableButton(validateForm)
             validateForm.buttonElement.textContent = this._loadingStart
         }
       }

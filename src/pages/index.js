@@ -9,7 +9,16 @@ import { Api } from '../components/Api';
 
 let userId
 
-const api = new Api({urlRequest: 'https://nomoreparties.co/v1/cohort-39', headers: {'authorization': 'c194112f-b44f-441c-9a8f-47ca2f04bd5c', 'Content-Type': 'application/json'}})
+const api = new Api(
+    {
+        urlRequest: 'https://nomoreparties.co/v1/cohort-39',
+        headers: {
+            'authorization': 'c194112f-b44f-441c-9a8f-47ca2f04bd5c',
+            'Content-Type': 'application/json'
+        },
+        disableButton: (form) => form.disableSubmitButton(),
+        enableButton:  (form) => form.enableSubmitButton()
+    })
 
 api.getInitialInfo()
 .then(res => {
