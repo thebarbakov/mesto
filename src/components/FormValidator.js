@@ -2,15 +2,13 @@ class FormValidator {
     constructor(config, form) {
       this._config = config,
       this._form = form
+      this._fieldsetList = this._form.querySelector(this._config.fieldsetList)
       this.buttonElement = this._form.querySelector(this._config.submitButtonSelector)
     }
 
     enableValidation() {
       this._form.addEventListener('submit', evt => evt.preventDefault());
-      const fieldsetList = Array.from(this._form.querySelectorAll(this._config.fieldsetList));
-      fieldsetList.forEach((fieldSet) => {
-        this._setEventListeners(fieldSet);
-      }); 
+      this._setEventListeners(this._fieldsetList);
     };
 
     _setEventListeners(formElement) {

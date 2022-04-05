@@ -1,0 +1,6 @@
+export const profileNameInput = document.querySelector('#profile-name-input')
+export const profileJobInput = document.querySelector('#profile-job-input')
+export const profileAvatarInput = document.querySelector('#profile-avatar-input')
+export const photoOverllay = document.querySelector('.profile__photo-overllay')
+export const editButton = document.querySelector('.profile__button-edit')
+export const addButton = document.querySelector('.profile__button-add')

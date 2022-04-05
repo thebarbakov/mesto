@@ -5,9 +5,24 @@ import { PopupWithForm } from '../components/PopupWithForm.js'
 import { PopupWithImage } from '../components/PopupWithImage.js'
 import { Section } from '../components/Section.js'
 import { UserInfo } from '../components/UserInfo.js'
-import { Api } from '../components/Api';
+import { Api } from '../components/Api.js';
+import {addButton, editButton, photoOverllay, profileAvatarInput, profileJobInput, profileNameInput} from '../utils/constants.js'
 
 let userId
+let loadingStart
+
+const renderLoading = (isLoading, validateForm) => {
+    if(validateForm.buttonElement.textContent !== 'Сохранение...') {
+        loadingStart = validateForm.buttonElement.textContent
+    }
+    if(isLoading){
+        validateForm.disableSubmitButton()
+        validateForm.buttonElement.textContent = 'Сохранение...'
+    } else {
+        validateForm.enableSubmitButton()
+        validateForm.buttonElement.textContent = loadingStart
+    }
+}
 
 const api = new Api(
     {
@@ -15,10 +30,9 @@ const api = new Api(
         headers: {
             'authorization': 'c194112f-b44f-441c-9a8f-47ca2f04bd5c',
             'Content-Type': 'application/json'
-        },
-        disableButton: (form) => form.disableSubmitButton(),
-        enableButton:  (form) => form.enableSubmitButton()
-    })
+        }
+    }
+)
 
 api.getInitialInfo()
 .then(res => {
@@ -27,6 +41,7 @@ api.getInitialInfo()
     userId = res[0]._id   
     cardList.render(res[1]);
 })
+.catch(rej => console.error((`Error: ${rej.status}`)))
 
 const formsArray = document.querySelectorAll('.popup__form')
 
@@ -60,8 +75,14 @@ const createCard = (item) => {
     userId,
     (cardId, element) => { // HandeCardDelete
         deletePopup.setSubmitAction(() => {
-            api.deleteCard(cardId, formValidator.cardDelete).then(element.remove())
-            deletePopup.closePopup();
+            renderLoading(true, formValidator.cardDelete)
+            api.deleteCard(cardId)
+            .then( () => {
+                element.remove()
+                deletePopup.closePopup()
+            })
+            .catch(rej => console.error((`Error: ${rej.status}`)))
+            .finally( () => renderLoading(false, formValidator.cardDelete))
         })
         deletePopup.openPopup()
     },
@@ -74,6 +95,7 @@ const createCard = (item) => {
                     element.querySelector('.like__counter').textContent = res.likes.length
                     element.querySelector('.like__button').classList.remove('like__button_active')
                 })
+                .catch(rej => console.error((`Error: ${rej.status}`)))
             } else {
                 api.setCardLike(cardId)
                 .then((res) => {
@@ -81,6 +103,7 @@ const createCard = (item) => {
                     element.querySelector('.like__counter').textContent = res.likes.length
                     element.querySelector('.like__button').classList.add('like__button_active')
                 })
+                .catch(rej => console.error((`Error: ${rej.status}`)))
             }
         }));
     })
@@ -97,38 +120,51 @@ const userInfo = new UserInfo({
 })
 
 const profilePopup = new PopupWithForm('.popup_profile',(data) => {
-    api.setUserInfo({name: data.profileName, about: data.profileJob}, formValidator.popupProfile)
-    .then(res => userInfo.setUserInfo(res))
-    profilePopup.closePopup(); 
+    renderLoading(true, formValidator.popupProfile)
+    api.setUserInfo({name: data.profileName, about: data.profileJob})
+    .then(res => {
+        userInfo.setUserInfo(res)
+        profilePopup.closePopup();
+    })
+    .catch(rej => console.error((`Error: ${rej.status}`)))
+    .finally(() => renderLoading(false, formValidator.popupProfile))
 })  
 
 const avatarPopup = new PopupWithForm('.popup_profile-avatar',(data) => {
-    api.setUserAvatar({avatar: data.avatarLink}, formValidator.avatarUpdate)
-    .then(res => userInfo.setUserAvatar(res)) 
-    avatarPopup.closePopup(); 
+    renderLoading(true, formValidator.avatarUpdate)
+    api.setUserAvatar({avatar: data.avatarLink})
+    .then(res => {
+        userInfo.setUserAvatar(res)
+        avatarPopup.closePopup(); 
+    }) 
+    .catch(rej => console.error((`Error: ${rej.status}`))) 
+    .finally( () => renderLoading(false, formValidator.avatarUpdate))
 })  
 
 const newCardForm = new PopupWithForm('.popup_new-card', (data) => {
-    api.addCard({name: data.cardName, link: data.cardLink}, formValidator.popupNewCard)
+    renderLoading(true, formValidator.popupNewCard)
+    api.addCard({name: data.cardName, link: data.cardLink})
     .then(data => {
         cardList.render([(data)])
+        newCardForm.closePopup();
+        formValidator.popupNewCard.disableSubmitButton()
     })
-    newCardForm.closePopup();
-    formValidator.popupNewCard.disableSubmitButton()
+    .catch(rej => console.error((`Error: ${rej.status}`))) 
+    .finally(() => renderLoading(false, formValidator.popupNewCard))
 })
 
 //Buttons
 
-document.querySelector('.profile__button-edit').addEventListener('click', e => {
-    document.querySelector('#profile-name-input').value = userInfo.getUserInfo().profileName
-    document.querySelector('#profile-job-input').value = userInfo.getUserInfo().profileJob
+editButton.addEventListener('click', e => {
+    profileNameInput.value = userInfo.getUserInfo().profileName
+    profileJobInput.value = userInfo.getUserInfo().profileJob
     profilePopup.openPopup()
 }); 
 
-document.querySelector('.profile__photo-overllay').addEventListener('click', e => {
-    document.querySelector('#profile-avatar-input').value = userInfo.getUserInfo().profileAvatar
+photoOverllay.addEventListener('click', e => {
+    profileAvatarInput.value = userInfo.getUserInfo().profileAvatar
     avatarPopup.openPopup()
 }); 
 
-document.querySelector('.profile__button-add').addEventListener('click', e => newCardForm.openPopup());
+addButton.addEventListener('click', e => newCardForm.openPopup());
 
