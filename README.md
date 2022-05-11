@@ -2,7 +2,7 @@
 
 ------------------
 
-![Screenshot of page](./images/mesto.png)
+![Screenshot of page](./src/images/mesto.png)
 
 [Ссылка на проект](https://thebarbakov.github.io/mesto/)
 
@@ -41,3 +41,4 @@
 2. ~~Доработать функцию возмонжости ставить лайки.~~ - Project V +
 3. ~~Добавить валилацию форм.~~ - Project VI +
 4. ~~Подключить проект к серверу для его полного функционирования.~~ - Project IX +
+5. ~~Портировать проект на React 
